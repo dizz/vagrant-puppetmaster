@@ -1,7 +1,5 @@
 forge "http://forge.puppetlabs.com"
 
-# this Puppetfile is broken :(
-
 # for doc see: https://github.com/rodjek/librarian-puppet
 
 mod 'apache',		:git => 'https://github.com/puppetlabs/puppetlabs-apache'
@@ -12,7 +10,7 @@ mod 'inifile',		:git => 'https://github.com/cprice-puppet/puppetlabs-inifile'
 mod 'mysql',		:git => 'https://github.com/puppetlabs/puppetlabs-mysql'
 mod 'passenger', 	:git => 'https://github.com/puppetlabs/puppetlabs-passenger'
 mod 'postgresql', 	:git => 'https://github.com/puppetlabs/puppet-postgresql'
-mod 'puppetdb',		:git => 'https://github.com/puppetlabs/puppetdb'
+mod 'puppetdb',		:git => 'https://github.com/puppetlabs/puppetlabs-puppetdb.git'
 mod 'ruby',			:git => 'https://github.com/puppetlabs/puppetlabs-ruby'
 mod 'stdlib',		:git => 'https://github.com/puppetlabs/puppetlabs-stdlib'
 
