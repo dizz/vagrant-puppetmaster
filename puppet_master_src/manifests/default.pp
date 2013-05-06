@@ -14,7 +14,8 @@ node default {
     
   # Configure puppetdb and its underlying database
   class { 'puppetdb': 
-    listen_address => '0.0.0.0',
+    listen_address => 'pm.cloudcomplab.dev',
+    ssl_listen_address => 'pm.cloudcomplab.dev',
     require => Package['puppetmaster'],
     puppetdb_version => latest,
   }
