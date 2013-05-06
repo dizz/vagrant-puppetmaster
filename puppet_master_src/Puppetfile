@@ -3,7 +3,7 @@ forge "http://forge.puppetlabs.com"
 # for doc see: https://github.com/rodjek/librarian-puppet
 
 mod 'apache',		:git => 'https://github.com/puppetlabs/puppetlabs-apache'
-mod 'dashboard',	:git => 'https://github.com/grahamgilbert/puppetlabs-dashboard'
+mod 'dashboard',	:git => 'https://github.com/dizz/puppetlabs-dashboard'
 mod 'firewall',		:git => 'https://github.com/puppetlabs/puppetlabs-firewall'
 mod 'hosts',		:git => 'https://github.com/dhoppe/puppet-hosts'
 mod 'inifile',		:git => 'https://github.com/cprice-puppet/puppetlabs-inifile'
