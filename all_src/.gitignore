@@ -2,3 +2,4 @@
 .librarian/
 modules/
 .DS_Store
+Puppetfile.lock
