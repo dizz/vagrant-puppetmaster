@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
     # folder, and the third is the path on the host to the actual folder.
 
     # Bootstrap puppet - install initial puppet packages via the shell provisioner
-    master_config.vm.provision :shell, :path => "puppet_master.sh"
+    master_config.vm.provision :shell, :path => "puppet_master_src/puppet_master.sh"
     
     # Configure puppet completely via the puppet provisioner
     master_config.vm.provision :puppet, :module_path => "puppet_master_src/modules", :manifests_path => "puppet_master_src/manifests", :manifest_file  => "default.pp"
@@ -38,5 +38,21 @@ Vagrant.configure("2") do |config|
     master_config.vm.synced_folder "all_src/hieradata", "/etc/puppet/hieradata"
   
   end # master_config
+
+  config.vm.define :wordpress do |wordpress|
+    wordpress.vm.hostname = "wp.cloudcomplab.dev"
+    wordpress.vm.box = "precise64"
+    wordpress.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    wordpress.vm.network :private_network, ip: "192.168.56.3"
+
+    # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
+    # a DNS server would look after this.
+    wordpress.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
+    # Configure box completely via the puppet master provisioner
+    wordpress.vm.provision :puppet_server, 
+                                :puppet_node => "wp.cloudcomplab.dev",
+                                :puppet_server => "pm.cloudcomplab.dev",
+                                :options => "--verbose --debug"
+  end # wordpress
   
 end

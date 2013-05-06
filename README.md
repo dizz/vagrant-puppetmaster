@@ -5,9 +5,11 @@ This is a Vagrantfile for running a testing setup for Puppet. It includes a Pupp
 
 - Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - Install [Vagrant](http://downloads.vagrantup.com/)
-- cd to the cloned directory
+- Install puppet librarian - `gem install librarian-puppet`
+- `cd` to the cloned directory
+- Execute `./setup_puppet_modules.sh`
 - Type in ``vagrant up`` to your terminal window
-- Profit
+- Have fun!
 
 ##Why?
 

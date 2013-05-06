@@ -1,0 +1,5 @@
+forge "http://forge.puppetlabs.com"
+
+# for doc see: https://github.com/rodjek/librarian-puppet
+
+mod 'wordpress', :git => 'https://github.com/jonhadfield/puppet-wordpress'

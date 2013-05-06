@@ -1,0 +1,16 @@
+forge "http://forge.puppetlabs.com"
+
+# for doc see: https://github.com/rodjek/librarian-puppet
+
+mod 'apache', :git => 'https://github.com/puppetlabs/puppetlabs-apache.git'
+mod 'dashboard', :git => 'https://github.com/grahamgilbert/puppetlabs-dashboard.git'
+mod 'firewall', :git => 'https://github.com/puppetlabs/puppetlabs-firewall.git'
+mod 'hosts', :git => 'https://github.com/dhoppe/puppet-hosts.git'
+mod 'inifile', :git => 'https://github.com/cprice-puppet/puppetlabs-inifile.git'
+mod 'mysql', :git => 'https://github.com/puppetlabs/puppetlabs-mysql.git'
+mod 'passenger', :git => 'https://github.com/puppetlabs/puppetlabs-passenger.git'
+mod 'postgresql', :git => 'https://github.com/puppetlabs/puppet-postgresql.git'
+mod 'puppetdb', :git => 'https://github.com/puppetlabs/puppetdb.git'
+mod 'ruby', :git => 'https://github.com/puppetlabs/puppetlabs-ruby'
+mod 'stdlib', :git => 'https://github.com/puppetlabs/puppetlabs-stdlib.git'
+
