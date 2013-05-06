@@ -6,7 +6,7 @@ This is a Vagrantfile for running a testing setup for Puppet. It includes a Pupp
 - Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - Install [Vagrant](http://downloads.vagrantup.com/)
 - cd to the cloned directory
-- Type in ``vagrant up`` to your terminal window
+- Type in ``vagrant up puppet_master`` to your terminal window
 - Profit
 
 ##Why?
