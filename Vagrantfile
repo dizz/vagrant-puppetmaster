@@ -52,7 +52,7 @@ Vagrant.configure("2") do |config|
     wordpress.vm.provision :puppet_server, 
                                 :puppet_node => "wp.cloudcomplab.dev",
                                 :puppet_server => "pm.cloudcomplab.dev",
-                                :options => "--verbose --debug"
+                                :options => "--verbose --debug --pluginsync true"
   end # wordpress
   
 end
