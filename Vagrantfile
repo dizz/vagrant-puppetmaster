@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
     # folder, and the third is the path on the host to the actual folder.
 
     # Bootstrap puppet - install initial puppet packages via the shell provisioner
-    master_config.vm.provision :shell, :path => "puppet_master.sh"
+    master_config.vm.provision :shell, :path => "puppet_master_src/puppet_master.sh"
     
     # Configure puppet completely via the puppet provisioner
     master_config.vm.provision :puppet, :module_path => "puppet_master_src/modules", :manifests_path => "puppet_master_src/manifests", :manifest_file  => "default.pp"
