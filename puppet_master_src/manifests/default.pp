@@ -1,5 +1,7 @@
 node default {
   
+  #TODO extract common variables e.g. hostnames
+
   host { 'pm.cloudcomplab.dev':
     ensure       => 'present',
     host_aliases => ['puppet'],
