@@ -17,7 +17,7 @@ node /osaio.cloudcomplab.dev/ {
 	exec { '/usr/bin/apt-get update':
 		refreshonly => true,
 		logoutput   => true,
-		subscribe   => [Apt::Source["openstack_folsom"]],
+		subscribe   => Apt::Source["openstack_grizzly"],
 	}
 
 	Exec['/usr/bin/apt-get update'] -> Package<||>
@@ -25,7 +25,7 @@ node /osaio.cloudcomplab.dev/ {
 	include 'apache'
 
 	class { 'cinder::setup_test_volume': } -> Service<||>
-	
+
 	# it's likely that this class is no longer 100% with quantum
 	class { 'openstack::all':
 		public_address          => $ipaddress_eth1,

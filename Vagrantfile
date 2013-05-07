@@ -57,4 +57,42 @@ Vagrant.configure("2") do |config|
                                 :puppet_server => "pm.cloudcomplab.dev",
                                 :options => "--verbose --debug --pluginsync true"
   end # openstack_aio
+
+  config.vm.define :openstack_controller do |openstack_controller|
+
+    openstack_controller.vm.hostname = "oscont.cloudcomplab.dev"
+    openstack_controller.vm.box = "precise64"
+    openstack_controller.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    openstack_controller.vm.network :private_network, ip: "192.168.56.4"
+    openstack_controller.vm.network :private_network, ip: "192.168.56.5", auto_config: false
+
+    # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
+    # a DNS server would look after this.
+    openstack_controller.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
+    
+    # Configure box completely via the puppet master provisioner
+    openstack_controller.vm.provision :puppet_server, 
+                                :puppet_node => "oscont.cloudcomplab.dev",
+                                :puppet_server => "pm.cloudcomplab.dev",
+                                :options => "--verbose --debug --pluginsync true"
+  end # openstack_controller
+
+  config.vm.define :openstack_compute do |openstack_compute|
+
+    openstack_compute.vm.hostname = "oscomp.cloudcomplab.dev"
+    openstack_compute.vm.box = "precise64"
+    openstack_compute.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    openstack_compute.vm.network :private_network, ip: "192.168.56.4"
+    openstack_compute.vm.network :private_network, ip: "192.168.56.5", auto_config: false
+
+    # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
+    # a DNS server would look after this.
+    openstack_compute.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
+    
+    # Configure box completely via the puppet master provisioner
+    openstack_compute.vm.provision :puppet_server, 
+                                :puppet_node => "oscomp.cloudcomplab.dev",
+                                :puppet_server => "pm.cloudcomplab.dev",
+                                :options => "--verbose --debug --pluginsync true"
+  end # openstack_compute
 end
