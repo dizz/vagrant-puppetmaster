@@ -1,6 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# OS and VirtualBox specific notes:
+# - Do not bind to eth0 - this is NAT'ed and will not help in your OS-auto quest!
+
 Vagrant.configure("2") do |config|
   config.vm.define :puppet_master do |master_config|
 
