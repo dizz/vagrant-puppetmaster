@@ -61,6 +61,7 @@ Vagrant.configure("2") do |config|
                                 :options => "--verbose --debug --pluginsync true"
   end # openstack_aio
 
+  # TODO
   config.vm.define :openstack_controller do |openstack_controller|
 
     openstack_controller.vm.hostname = "oscont.cloudcomplab.dev"
@@ -80,6 +81,7 @@ Vagrant.configure("2") do |config|
                                 :options => "--verbose --debug --pluginsync true"
   end # openstack_controller
 
+  # TODO
   config.vm.define :openstack_compute do |openstack_compute|
 
     openstack_compute.vm.hostname = "oscomp.cloudcomplab.dev"
@@ -98,4 +100,24 @@ Vagrant.configure("2") do |config|
                                 :puppet_server => "pm.cloudcomplab.dev",
                                 :options => "--verbose --debug --pluginsync true"
   end # openstack_compute
+
+  # TODO
+  config.vm.define :openstack_network do |openstack_network|
+
+    openstack_network.vm.hostname = "osnet.cloudcomplab.dev"
+    openstack_network.vm.box = "precise64"
+    openstack_network.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    openstack_network.vm.network :private_network, ip: "192.168.56.4"
+    openstack_network.vm.network :private_network, ip: "192.168.56.5", auto_config: false
+
+    # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
+    # a DNS server would look after this.
+    openstack_network.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
+    
+    # Configure box completely via the puppet master provisioner
+    openstack_network.vm.provision :puppet_server, 
+                                :puppet_node => "osnet.cloudcomplab.dev",
+                                :puppet_server => "pm.cloudcomplab.dev",
+                                :options => "--verbose --debug --pluginsync true"
+  end # openstack_network
 end

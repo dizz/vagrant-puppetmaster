@@ -56,3 +56,15 @@ node /osaio.cloudcomplab.dev/ {
 		controller_node      => '127.0.0.1',
 	}
 }
+
+node /osaio.cloudcomplab.dev/ {
+}
+
+node /oscont.cloudcomplab.dev/ {
+}
+
+node /oscomp.cloudcomplab.dev/ {
+}
+
+node /osnet.cloudcomplab.dev/ {
+}
