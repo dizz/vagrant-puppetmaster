@@ -7,8 +7,25 @@ node /osaio.cloudcomplab.dev/ {
 	# TODO deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main
 	# TODO apt-get update
 
+	apt::source { 'openstack_grizzly':
+		location	=> "http://ubuntu-cloud.archive.canonical.com/ubuntu",
+		release		=> "precise-updates/grizzly",
+		repos		=> "main",
+		required_packages => 'ubuntu-cloud-keyring',
+	}
+
+	exec { '/usr/bin/apt-get update':
+		refreshonly => true,
+		logoutput   => true,
+		subscribe   => [Apt::Source["openstack_folsom"]],
+	}
+
+	Exec['/usr/bin/apt-get update'] -> Package<||>
+
 	include 'apache'
 
+	class { 'cinder::setup_test_volume': } -> Service<||>
+	
 	# it's likely that this class is no longer 100% with quantum
 	class { 'openstack::all':
 		public_address          => $ipaddress_eth1,
