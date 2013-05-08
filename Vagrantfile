@@ -22,16 +22,16 @@ Vagrant.configure("2") do |config|
     # any other machines on the same network, but cannot be accessed (through this
     # network interface) by any external networks.
     master_config.vm.network :private_network, ip: "192.168.56.2"
-      
+
     # Share an additional folder to the guest VM. The first argument is
     # an identifier, the second is the path on the guest to mount the
     # folder, and the third is the path on the host to the actual folder.
 
     # Bootstrap puppet - install initial puppet packages via the shell provisioner
     master_config.vm.provision :shell, :path => "puppet_master_src/puppet_master.sh"
-    
+
     # Configure puppet completely via the puppet provisioner
-    master_config.vm.provision :puppet, :module_path => "puppet_master_src/modules", :manifests_path => "puppet_master_src/manifests", :manifest_file  => "default.pp"
+    master_config.vm.provision :puppet, :module_path => "puppet_master_src/modules", :manifests_path => "puppet_master_src/manifests", :manifest_file => "default.pp"
 
     # All puppet code to be used by managed nodes should be placed under
     # all_src/ and they'll be placed into the correct place. This includes puppet config files.
@@ -39,9 +39,9 @@ Vagrant.configure("2") do |config|
     master_config.vm.synced_folder "all_src/manifests", "/etc/puppet/manifests"
     master_config.vm.synced_folder "all_src/modules", "/etc/puppet/modules"
     master_config.vm.synced_folder "all_src/hieradata", "/etc/puppet/hieradata"
-  
+
   end # master_config
-  
+
   config.vm.define :openstack_aio do |openstack_aio|
 
     openstack_aio.vm.hostname = "osaio.cloudcomplab.dev"
@@ -53,12 +53,12 @@ Vagrant.configure("2") do |config|
     # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
     # a DNS server would look after this.
     openstack_aio.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
-    
+
     # Configure box completely via the puppet master provisioner
-    openstack_aio.vm.provision :puppet_server, 
-                                :puppet_node => "osaio.cloudcomplab.dev",
-                                :puppet_server => "pm.cloudcomplab.dev",
-                                :options => "--verbose --debug --pluginsync true"
+    openstack_aio.vm.provision :puppet_server,
+                               :puppet_node => "osaio.cloudcomplab.dev",
+                               :puppet_server => "pm.cloudcomplab.dev",
+                               :options => "--verbose --debug --pluginsync true"
   end # openstack_aio
 
   # TODO
@@ -73,15 +73,15 @@ Vagrant.configure("2") do |config|
     # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
     # a DNS server would look after this.
     openstack_controller.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
-    
+
     # Configure box completely via the puppet master provisioner
-    openstack_controller.vm.provision :puppet_server, 
-                                :puppet_node => "oscont.cloudcomplab.dev",
-                                :puppet_server => "pm.cloudcomplab.dev",
-                                :options => "--verbose --debug --pluginsync true"
+    openstack_controller.vm.provision :puppet_server,
+                                      :puppet_node => "oscont.cloudcomplab.dev",
+                                      :puppet_server => "pm.cloudcomplab.dev",
+                                      :options => "--verbose --debug --pluginsync true"
   end # openstack_controller
 
-  # TODO
+  # TODO - how many adapters?
   config.vm.define :openstack_compute do |openstack_compute|
 
     openstack_compute.vm.hostname = "oscomp.cloudcomplab.dev"
@@ -93,15 +93,15 @@ Vagrant.configure("2") do |config|
     # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
     # a DNS server would look after this.
     openstack_compute.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
-    
+
     # Configure box completely via the puppet master provisioner
-    openstack_compute.vm.provision :puppet_server, 
-                                :puppet_node => "oscomp.cloudcomplab.dev",
-                                :puppet_server => "pm.cloudcomplab.dev",
-                                :options => "--verbose --debug --pluginsync true"
+    openstack_compute.vm.provision :puppet_server,
+                                   :puppet_node => "oscomp.cloudcomplab.dev",
+                                   :puppet_server => "pm.cloudcomplab.dev",
+                                   :options => "--verbose --debug --pluginsync true"
   end # openstack_compute
 
-  # TODO
+  # TODO - how many adapters?
   config.vm.define :openstack_network do |openstack_network|
 
     openstack_network.vm.hostname = "osnet.cloudcomplab.dev"
@@ -113,11 +113,11 @@ Vagrant.configure("2") do |config|
     # we need to run an apt update 1st and set the hostname of the puppetmaster - in the real world 
     # a DNS server would look after this.
     openstack_network.vm.provision :shell, :inline => "apt-get update >/dev/null && echo '192.168.56.2 pm.cloudcomplab.dev pm puppet' >> /etc/hosts"
-    
+
     # Configure box completely via the puppet master provisioner
-    openstack_network.vm.provision :puppet_server, 
-                                :puppet_node => "osnet.cloudcomplab.dev",
-                                :puppet_server => "pm.cloudcomplab.dev",
-                                :options => "--verbose --debug --pluginsync true"
+    openstack_network.vm.provision :puppet_server,
+                                   :puppet_node => "osnet.cloudcomplab.dev",
+                                   :puppet_server => "pm.cloudcomplab.dev",
+                                   :options => "--verbose --debug --pluginsync true"
   end # openstack_network
 end
