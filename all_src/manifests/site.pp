@@ -2,11 +2,6 @@
 
 node /osaio.cloudcomplab.dev/ {
 
-	# TODO apt-get install ubuntu-cloud-keyring
-	# TODO /etc/apt/sources.list.d/grizzly.list
-	# TODO deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main
-	# TODO apt-get update
-
 	apt::source { 'openstack_grizzly':
 		location	=> "http://ubuntu-cloud.archive.canonical.com/ubuntu",
 		release		=> "precise-updates/grizzly",
@@ -55,9 +50,6 @@ node /osaio.cloudcomplab.dev/ {
 		keystone_admin_token => 'stpeter',
 		controller_node      => '127.0.0.1',
 	}
-}
-
-node /osaio.cloudcomplab.dev/ {
 }
 
 node /oscont.cloudcomplab.dev/ {
